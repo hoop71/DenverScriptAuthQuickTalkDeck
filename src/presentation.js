@@ -1,5 +1,6 @@
 // Import React
 import React from 'react';
+import preloader from './utils/preloader';
 
 // Import Spectacle Core tags
 import {
@@ -15,15 +16,20 @@ import {
   Text,
   Typeface
 } from 'spectacle';
-
-// Import Media
-import authPhoto from './media/auth.png';
-import firestorePhoto from './media/firestore.png';
-import hostingPhoto from './media/hosting.png';
-import patagoniaMatt from './media/patagoniaMatt.png';
-
 // Import theme
 import createTheme from 'spectacle/lib/themes/default';
+
+const images = {
+  authPhoto: require('./media/auth.png'),
+  firestorePhoto: require('./media/firestore.png'),
+  hostingPhoto: require('./media/hosting.png'),
+  patagoniaMatt: require('./media/patagoniaMatt.png'),
+  firebaseSigninOptions: require('./media/firebaseSigninOptions.png'),
+  feetCoding: require('./media/feetCoding.gif'),
+  hellGif: require('./media/hellGif.gif')
+};
+
+preloader(images);
 
 // Require CSS
 require('normalize.css');
@@ -54,14 +60,14 @@ export default class Presentation extends React.Component {
             />
 
             <Heading size={1} fit caps lineHeight={1.3} textColor="quartenary">
-              Auth and Realtime Listeners
+              Auth and real-time Listeners
             </Heading>
             <Heading size={1} fit caps lineHeight={1} textColor="quartenary">
               with Firebase and Cloud Firestore
             </Heading>
           </Slide>
           <Slide
-            bgImage={patagoniaMatt}
+            bgImage={images.patagoniaMatt}
             transition={['slide']}
             bgColor="primary"
             textColor="tertiary"
@@ -72,6 +78,13 @@ export default class Presentation extends React.Component {
             <Cite textAlign="left" textColor="white">
               Future Employer
             </Cite>
+          </Slide>
+          {/* AUTH SUCKS */}
+          <Slide>
+            <Image style={{ minWidth: '75%', height: 'auto' }} src={images.hellGif} />
+          </Slide>
+          <Slide>
+            <Image src={images.feetCoding} />
           </Slide>
           {/* WHAT IS FIREBASE */}
           <Slide transition={['slide']} bgColor="primary">
@@ -87,41 +100,42 @@ export default class Presentation extends React.Component {
                 />
               </a>
               <div style={{ display: 'flex', marginTop: '.25em' }}>
-                <Image style={{ height: '400px', borderRadius: '5px' }} src={authPhoto} />
-                <Image style={{ height: '400px', borderRadius: '5px' }} src={firestorePhoto} />
-                <Image style={{ height: '400px', borderRadius: '5px' }} src={hostingPhoto} />
+                <Image style={{ height: '400px', borderRadius: '5px' }} src={images.authPhoto} />
+                <Image
+                  style={{ height: '400px', borderRadius: '5px' }}
+                  src={images.firestorePhoto}
+                />
+                <Image style={{ height: '400px', borderRadius: '5px' }} src={images.hostingPhoto} />
               </div>
             </Heading>
           </Slide>
           {/* FIREBASE AUTH 101 */}
-          <Slide>
+          <Slide
+            notes="<ul>
+                    <li>Multiple Providers: Sign-in flows for email, phone authentication, Google,
+                        Facebook, Twitter and GitHub sign-in.</li>
+                    <li>Account Linking: Flows to safely link user accounts across identity
+                        providers.
+                    </li>
+                    <li>One-tap sign-up and automatic sign-in: Automatic integration with One-tap
+                    sign-up for fast cross-device sign-in.
+                    </li>
+                    <li>
+                    Localized UI: Internationalization for over 40 languages.
+                    </li>
+                    <li>
+                    Can use their prebuilt UI options or customize the flow
+                    </li>
+                    <li>
+                    Can also integrate transactional emails for email varification.
+                    </li>
+                  </ul>"
+          >
             <Heading size={1} fit caps lineHeight={1.3} textColor="quartenary">
               Firebase Auth Options
             </Heading>
-            <List>
-              <Typeface weight="400">
-                <Text overflow="true" textSize=".5em">
-                  Multiple Providers: Sign-in flows for email, phone authentication, Google,
-                  Facebook, Twitter and GitHub sign-in.
-                </Text>
-              </Typeface>
-              <Typeface weight="400">
-                <Text textSize=".5em">
-                  Account Linking: Flows to safely link user accounts across identity providers.
-                </Text>
-              </Typeface>
-              <Typeface weight="400">
-                <Text textSize=".5em">
-                  One-tap sign-up and automatic sign-in: Automatic integration with One-tap sign-up
-                  for fast cross-device sign-in.
-                </Text>
-              </Typeface>
-              <Typeface weight="400">
-                <Text textSize=".5em">
-                  Localized UI: Internationalization for over 40 languages.
-                </Text>
-              </Typeface>
-            </List>
+
+            <Image style={{ width: '80%' }} src={images.firebaseSigninOptions} />
           </Slide>
           {/* FIREBASE SDK */}
           <Slide>
@@ -134,48 +148,65 @@ export default class Presentation extends React.Component {
             <CodePane theme="light" lang="javascript" source="import 'firebase/auth';" />
           </Slide>
           {/* FIREBASE AUTH */}
-          <Slide>
+          <Slide
+            notes="<ul>
+                          <li>
+                            When working in the Firebase Javascript SDK, you'll be working inside the Auth namespace that returns all the methods you need for Auth
+                          </li>
+                          <li>
+                            There are all the options shown earlier but we are going to work with the Google Login
+                          </li>
+                          <li>
+                            You can sign in with Popup or Redirect or custom flows. We're gonna use the Popup method. 
+                          </li>
+                          <li>
+                            When you call this method, it creates or signs in an existing user, whichever is needed. 
+                          </li>
+                          <li>
+                            This will return a promise so it can only be resolved once. So if you want to motitor auth state you can do the following... 
+                          </li>
+                        </ul>"
+          >
             <CodePane theme="light" lang="javascript" source="const auth = firebase.auth()" />
             <CodePane
               theme="light"
               lang="javascript"
               source="const googleAuthProvider = new firebase.auth.GoogleAuthProvider();"
             />
-          </Slide>
+            <CodePane
+              theme="light"
+              lang="javascript"
+              source="auth.signInWithPopup(googleAuthProvider);"
+            />
 
-          {/* <Slide transition={['slide']} bgColor="primary">
-          <Heading size={6} textColor="tertiary" caps>
-            Typography
-          </Heading>
-          <Heading size={1} textColor="secondary">
-            Heading 1
-          </Heading>
-          <Heading size={2} textColor="secondary">
-            Heading 2
-          </Heading>
-          <Heading size={3} textColor="secondary">
-            Heading 3
-          </Heading>
-          <Heading size={4} textColor="secondary">
-            Heading 4
-          </Heading>
-          <Heading size={5} textColor="secondary">
-            Heading 5
-          </Heading>
-          <Text size={6} textColor="secondary">
-            Standard text
-          </Text>
-        </Slide> */}
-          <Slide transition={['fade']} bgColor="primary" textColor="tertiary">
-            <Heading size={6} textColor="secondary" caps>
-              Standard List
-            </Heading>
-            <List>
-              <ListItem>Item 1</ListItem>
-              <ListItem>Item 2</ListItem>
-              <ListItem>Item 3</ListItem>
-              <ListItem>Item 4</ListItem>
-            </List>
+            <CodePane theme="light" lang="javascript" source="auth.signOut();" />
+          </Slide>
+          {/* AUTH ON STATE CHANGE */}
+          <Slide
+            notes="<ul>
+                    <li>
+                      If you want to monitor the auth state, you'll want to use the onAuthStateChanged method that takes in a callback
+                    </li>
+                    <li>
+                      This callback is fired everytime the auth status is changed and either returns the User object or null depending on Auth state
+                    </li>
+                  </ul>"
+          >
+            <CodePane
+              theme="light"
+              lang="javascript"
+              source="auth.onAuthStateChanged(user => {})"
+            />
+            <CodePane
+              theme="light"
+              lang="javascript"
+              source="const googleAuthProvider = new firebase.auth.GoogleAuthProvider();"
+            />
+            <CodePane
+              theme="light"
+              lang="javascript"
+              source="auth.signInWithPopup(googleAuthProvider);"
+            />
           </Slide>
         </Deck>
       </div>
