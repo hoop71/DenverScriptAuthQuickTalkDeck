@@ -3,7 +3,6 @@ import React from 'react';
 
 // Import Spectacle Core tags
 import {
-  BlockQuote,
   CodePane,
   Cite,
   Deck,
@@ -13,7 +12,8 @@ import {
   List,
   Quote,
   Slide,
-  Text
+  Text,
+  Typeface
 } from 'spectacle';
 
 // Import Media
@@ -73,6 +73,7 @@ export default class Presentation extends React.Component {
               Future Employer
             </Cite>
           </Slide>
+          {/* WHAT IS FIREBASE */}
           <Slide transition={['slide']} bgColor="primary">
             <Heading size={6} textColor="quartenary" caps>
               <a
@@ -92,7 +93,56 @@ export default class Presentation extends React.Component {
               </div>
             </Heading>
           </Slide>
-          <Slide />
+          {/* FIREBASE AUTH 101 */}
+          <Slide>
+            <Heading size={1} fit caps lineHeight={1.3} textColor="quartenary">
+              Firebase Auth Options
+            </Heading>
+            <List>
+              <Typeface weight="400">
+                <Text overflow="true" textSize=".5em">
+                  Multiple Providers: Sign-in flows for email, phone authentication, Google,
+                  Facebook, Twitter and GitHub sign-in.
+                </Text>
+              </Typeface>
+              <Typeface weight="400">
+                <Text textSize=".5em">
+                  Account Linking: Flows to safely link user accounts across identity providers.
+                </Text>
+              </Typeface>
+              <Typeface weight="400">
+                <Text textSize=".5em">
+                  One-tap sign-up and automatic sign-in: Automatic integration with One-tap sign-up
+                  for fast cross-device sign-in.
+                </Text>
+              </Typeface>
+              <Typeface weight="400">
+                <Text textSize=".5em">
+                  Localized UI: Internationalization for over 40 languages.
+                </Text>
+              </Typeface>
+            </List>
+          </Slide>
+          {/* FIREBASE SDK */}
+          <Slide>
+            <CodePane
+              theme="light"
+              lang="javascript"
+              source="$ yarn add firebase || npm install firebase -- save"
+            />
+            <CodePane theme="light" lang="javascript" source="import firebase from 'firebase/app" />
+            <CodePane theme="light" lang="javascript" source="import 'firebase/auth';" />
+          </Slide>
+          {/* FIREBASE AUTH */}
+          <Slide>
+            <CodePane theme="light" lang="javascript" source="const auth = firebase.auth()" />
+            <CodePane
+              theme="light"
+              lang="javascript"
+              source="const googleAuthProvider = new firebase.auth.GoogleAuthProvider();"
+            />
+          </Slide>
+
           {/* <Slide transition={['slide']} bgColor="primary">
           <Heading size={6} textColor="tertiary" caps>
             Typography
