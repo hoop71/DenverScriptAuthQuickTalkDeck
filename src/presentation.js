@@ -3,19 +3,7 @@ import React from 'react';
 import preloader from './utils/preloader';
 
 // Import Spectacle Core tags
-import {
-  CodePane,
-  Cite,
-  Deck,
-  Heading,
-  Image,
-  ListItem,
-  List,
-  Quote,
-  Slide,
-  Text,
-  Typeface
-} from 'spectacle';
+import { CodePane, Cite, Deck, Heading, Image, Quote, Slide } from 'spectacle';
 // Import theme
 import createTheme from 'spectacle/lib/themes/default';
 
@@ -75,6 +63,7 @@ export default class Presentation extends React.Component {
             <Quote textAlign="left" textColor="quartenary" fit>
               We're so glad we hired Matt. He's super awesome.
             </Quote>
+            <Cite textColor="primary"> matt@mhooper72.com</Cite>
             <Cite textAlign="left" textColor="white">
               Future Employer
             </Cite>
@@ -92,7 +81,6 @@ export default class Presentation extends React.Component {
               <a
                 style={{ marginTop: '-15px' }}
                 href="https://firebase.google.com/products/#develop-features"
-                target="_blank"
               >
                 <Image
                   style={{ width: '50%' }}
@@ -142,7 +130,7 @@ export default class Presentation extends React.Component {
             <CodePane
               theme="light"
               lang="javascript"
-              source="$ yarn add firebase || npm install firebase -- save"
+              source="$ yarn add firebase || npm install firebase --save"
             />
             <CodePane theme="light" lang="javascript" source="import firebase from 'firebase/app" />
             <CodePane theme="light" lang="javascript" source="import 'firebase/auth';" />
@@ -190,22 +178,13 @@ export default class Presentation extends React.Component {
                     <li>
                       This callback is fired everytime the auth status is changed and either returns the User object or null depending on Auth state
                     </li>
+                    <li>Now we will go look at some code in action to check this out a little better </li>
                   </ul>"
           >
             <CodePane
               theme="light"
               lang="javascript"
               source="auth.onAuthStateChanged(user => {})"
-            />
-            <CodePane
-              theme="light"
-              lang="javascript"
-              source="const googleAuthProvider = new firebase.auth.GoogleAuthProvider();"
-            />
-            <CodePane
-              theme="light"
-              lang="javascript"
-              source="auth.signInWithPopup(googleAuthProvider);"
             />
           </Slide>
         </Deck>
